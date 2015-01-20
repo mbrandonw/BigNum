@@ -8,44 +8,35 @@
 
 import Foundation
 
-struct Decimal {
-  let d: NSDecimalNumber
-
-  init(_ decimal: NSDecimalNumber) {
-    d = decimal
-  }
-}
-
-
-// MARK: Equatable
-
-extension Decimal : Equatable {}
-func == (left: Decimal, right: Decimal) -> Bool {
-  return left.d.isEqualToNumber(right.d)
+extension NSDecimalNumber : Equatable {}
+public func == (left: NSDecimalNumber, right: NSDecimalNumber) -> Bool {
+  return left.isEqualToNumber(right)
 }
 
 
 // MARK: Printable
 
-extension Decimal : Printable {
-  var description: String {
-    return self.d.stringValue
-  }
+//extension NSDecimalNumber : Printable {
+//  public var description: String {
+//    get {
+//      return self.stringValue
+//    }
+//  }
+//}
+
+
+func + (left: NSDecimalNumber, right: NSDecimalNumber) -> NSDecimalNumber {
+  return left.decimalNumberByAdding(right)
 }
 
-
-func + (left: Decimal, right: Decimal) -> Decimal {
-  return Decimal(left.d.decimalNumberByAdding(right.d))
+func - (left: NSDecimalNumber, right: NSDecimalNumber) -> NSDecimalNumber {
+  return left.decimalNumberBySubtracting(right)
 }
 
-func - (left: Decimal, right: Decimal) -> Decimal {
-  return Decimal(left.d.decimalNumberBySubtracting(right.d))
+func * (left: NSDecimalNumber, right: NSDecimalNumber) -> NSDecimalNumber {
+  return left.decimalNumberByMultiplyingBy(right)
 }
 
-func * (left: Decimal, right: Decimal) -> Decimal {
-  return Decimal(left.d.decimalNumberByMultiplyingBy(right.d))
-}
-
-func / (left: Decimal, right: Decimal) -> Decimal {
-  return Decimal(left.d.decimalNumberByDividingBy(right.d))
+func / (left: NSDecimalNumber, right: NSDecimalNumber) -> NSDecimalNumber {
+  return left.decimalNumberByDividingBy(right)
 }
